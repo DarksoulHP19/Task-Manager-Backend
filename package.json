@@ -1,0 +1,33 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "This package for backend development of the task manager app.",
+  "keywords": [
+    "MERN",
+    "STACK"
+  ],
+  "homepage": "https://github.com/DarksoulHP19/Task-Manager-application#readme",
+  "bugs": {
+    "url": "https://github.com/DarksoulHP19/Task-Manager-application/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DarksoulHP19/Task-Manager-application.git"
+  },
+  "license": "ISC",
+  "author": "Harsh Patel aka DarksoulHP19,Ankita Maheriya aka AnkitaMaheriya, Priya Raina aka priyaraina66",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.10.0"
+  }
+}
