@@ -6,7 +6,11 @@ COPY package.json package-lock.json ./
 
 RUN npm install
 
-COPY . /app
+COPY . .
+
+ENV MONGO_URI=${MONGO_URI}
+ENV JWT_SECRET=${JWT_SECRET}
+
 
 EXPOSE 3000
 
