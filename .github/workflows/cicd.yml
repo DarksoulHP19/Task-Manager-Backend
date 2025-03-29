@@ -1,0 +1,38 @@
+name: Deploy Task Manager backend to AWS 
+
+on:
+  push:
+    branches:
+      - mern-ec2-docker
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name : Checkout Source                
+              uses : actions/checkout@v4
+              
+            - name : Login to Docker Hub Securely
+              run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin || exit 1 
+
+            - name : Build Docker Image
+              run : docker build -t harshx19/task-manager-backend .
+
+            - name : Publish Image to Docker Hub
+              run : docker push harshx19/task-manager-backend:latest
+
+    deploy:
+        needs: build
+        runs-on: self-hosted
+        steps:
+            - name : pull Docker Image from Docker Hub
+              run : docker pull harshx19/task-manager-backend:latest
+
+            - name : Stop and Remove Existing Container
+              run : docker stop task-manager-backend-container || true
+              
+            - name : Remove Existing Container
+              run : docker rm task-manager-backend-container || true
+        
+            - name : Run Docker Container
+              run : docker run -d -p 3000:3000  --name task-manager-backend-container -e  MONGO_URI=${{ secrets.MONGO_URI }} -e JWT_SECRET=${{ secrets.JWT_SECRET }}  harshx19/task-manager-backend
