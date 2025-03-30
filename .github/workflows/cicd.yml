@@ -35,7 +35,7 @@ jobs:
               run : docker rm task-manager-backend-container || true
         
             - name : Run Docker Container
-              run : docker run -d -p 3000:3000  --name task-manager-backend-container -e  MONGO_URI=${{ secrets.MONGO_URI }} -e JWT_SECRET=${{ secrets.JWT_SECRET }}  harshx19/task-manager-backend
+              run : docker run -d -p 3000:3000  --name task-manager-backend-container -e  MONGO_URI="${{ secrets.MONGO_URI }}" -e JWT_SECRET="${{ secrets.JWT_SECRET }}"  harshx19/task-manager-backend
 
     verification:
         needs: deploy
